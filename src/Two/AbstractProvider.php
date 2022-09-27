@@ -14,9 +14,9 @@ abstract class AbstractProvider implements ProviderContract
     /**
      * The HTTP Client instance.
      *
-     * @var \GuzzleHttp\Client
+     * @var \GuzzleHttp\Client|null
      */
-    protected \GuzzleHttp\Client $httpClient;
+    protected \GuzzleHttp\Client|null $httpClient = null;
 
     /**
      * The custom parameters to be sent with the request.
@@ -89,10 +89,10 @@ abstract class AbstractProvider implements ProviderContract
     /**
      * Get the authentication URL for the provider.
      *
-     * @param  string  $state
+     * @param  string|null $state
      * @return string
      */
-    abstract public function getAuthUrl(string $state): string;
+    abstract public function getAuthUrl(string|null $state): string;
 
     /**
      * Get the token URL for the provider.
@@ -141,10 +141,10 @@ abstract class AbstractProvider implements ProviderContract
      * Build the authentication URL for the provider from the given base URL.
      *
      * @param  string  $url
-     * @param  string  $state
+     * @param  string|null  $state
      * @return string
      */
-    protected function buildAuthUrlFromBase(string $url, string $state): string
+    protected function buildAuthUrlFromBase(string $url, string|null $state): string
     {
         return $url.'?'.http_build_query($this->getCodeFields($state), '', '&', $this->encodingType);
     }
@@ -342,9 +342,9 @@ abstract class AbstractProvider implements ProviderContract
     /**
      * Get a instance of the Guzzle HTTP client.
      *
-     * @return \GuzzleHttp\Client
+     * @return \GuzzleHttp\Client|\Mockery\MockInterface
      */
-    protected function getHttpClient(): \GuzzleHttp\Client
+    protected function getHttpClient(): \GuzzleHttp\Client|\Mockery\MockInterface
     {
         if (is_null($this->httpClient)) {
             $this->httpClient = new Client($this->guzzle);

@@ -24,7 +24,7 @@ class GithubProvider extends AbstractProvider implements ProviderInterface
     /**
      * {@inheritdoc}
      */
-    public function getAuthUrl(string $state): string
+    public function getAuthUrl(string|null $state): string
     {
         return $this->buildAuthUrlFromBase('https://github.com/login/oauth/authorize', $state);
     }
@@ -72,7 +72,7 @@ class GithubProvider extends AbstractProvider implements ProviderInterface
                 $emailsUrl, $this->getRequestOptions($token)
             );
         } catch (Exception $e) {
-            return;
+            return null;
         }
 
         foreach (json_decode($response->getBody(), true) as $email) {

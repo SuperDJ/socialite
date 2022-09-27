@@ -10,11 +10,11 @@ use stdClass;
 class OAuthTwoTestProviderStub extends AbstractProvider
 {
     /**
-     * @var \GuzzleHttp\Client|\Mockery\MockInterface
+     * @var \GuzzleHttp\Client|\Mockery\MockInterface|null
      */
-    public \GuzzleHttp\Client|\Mockery\MockInterface $http;
+    public \GuzzleHttp\Client|\Mockery\MockInterface|null $http = null;
 
-    public function getAuthUrl(string $state): string
+    public function getAuthUrl(string|null $state): string
     {
         return $this->buildAuthUrlFromBase('http://auth.url', $state);
     }

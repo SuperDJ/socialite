@@ -9,9 +9,9 @@ use stdClass;
 class FacebookTestProviderStub extends FacebookProvider
 {
     /**
-     * @var \GuzzleHttp\Client|\Mockery\MockInterface
+     * @var \GuzzleHttp\Client|\Mockery\MockInterface|null
      */
-    public \GuzzleHttp\Client|\Mockery\MockInterface $http;
+    public \GuzzleHttp\Client|\Mockery\MockInterface|null $http = null;
 
     protected function getUserByToken(string $token): array
     {
